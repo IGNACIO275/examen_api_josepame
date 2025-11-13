@@ -5,44 +5,36 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Category extends Model
 {
-    
+    protected $table = 'categories';
+
+
+
     protected $fillable = [
         'name',
-        'lastname',
-        'email',
-        'country',
-        'phone',
-        'password',
+        'description',
+        'companies_idcompany',
     ];
-    protected $table = 'users';
-    
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'roles_users', 'users_iduser', 'roles_idrole');
-    }
+    
 
     public function company()
     {
-        return $this->hasOne(Company::class, 'users_id');
+        return $this->belongsTo(Company::class, 'companies_idcompany', 'idcompany');
     }
 
-   public function deliveries()
-   {
-      return $this->hasMany(Delivery::class, 'user_id'); 
-   }
-
-    public function carts()
+    public function products()
     {
-        return $this->hasMany(Cart::class, 'users_id');
+        return $this->hasMany(Product::class, 'categories_idcategory', 'idcategory');
     }
 
-    public function orders()
+    public function services()
     {
-        return $this->hasMany(Order::class, 'users_id');
+        return $this->hasMany(Service::class, 'categories_idcategory', 'idcategory');
     }
+
+    
     public function scopeInclude($query, $includes)
     {
         if (!$includes) {
@@ -92,8 +84,5 @@ class User extends Model
         return $query;
     }
 }
-
-
-
 
 

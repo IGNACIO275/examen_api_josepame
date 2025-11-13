@@ -5,43 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Vehicle extends Model
 {
-    
-    protected $fillable = [
-        'name',
-        'lastname',
-        'email',
-        'country',
-        'phone',
-        'password',
-    ];
-    protected $table = 'users';
-    
+    protected $table = 'vehicles';
 
-    public function roles()
+    public function deliverie()
     {
-        return $this->belongsToMany(Role::class, 'roles_users', 'users_iduser', 'roles_idrole');
-    }
-
-    public function company()
-    {
-        return $this->hasOne(Company::class, 'users_id');
-    }
-
-   public function deliveries()
-   {
-      return $this->hasMany(Delivery::class, 'user_id'); 
-   }
-
-    public function carts()
-    {
-        return $this->hasMany(Cart::class, 'users_id');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'users_id');
+        return $this->belongsTo(Deliverie::class, 'deliveries_iddelivery');
     }
     public function scopeInclude($query, $includes)
     {

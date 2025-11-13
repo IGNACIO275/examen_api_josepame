@@ -5,43 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Cart extends Model
 {
-    
-    protected $fillable = [
-        'name',
-        'lastname',
-        'email',
-        'country',
-        'phone',
-        'password',
-    ];
-    protected $table = 'users';
-    
+    protected $table = 'carts';
 
-    public function roles()
+    public function user()
     {
-        return $this->belongsToMany(Role::class, 'roles_users', 'users_iduser', 'roles_idrole');
+        return $this->belongsTo(User::class, 'users_iduser');
     }
 
-    public function company()
+    public function product()
     {
-        return $this->hasOne(Company::class, 'users_id');
+        return $this->belongsTo(Product::class, 'products_idproduct');
     }
 
-   public function deliveries()
-   {
-      return $this->hasMany(Delivery::class, 'user_id'); 
-   }
-
-    public function carts()
+    public function service()
     {
-        return $this->hasMany(Cart::class, 'users_id');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'users_id');
+        return $this->belongsTo(Service::class, 'services_idservice');
     }
     public function scopeInclude($query, $includes)
     {

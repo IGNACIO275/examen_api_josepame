@@ -1,19 +1,44 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\VehicleController;
+use App\Http\Controllers\Api\DeliveryController;
+use App\Http\Controllers\Api\CartController;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
+| Aquí definimos todas las rutas de tu API
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+Route::apiResource('roles', RoleController::class);
+
+Route::apiResource('users', UserController::class);
+
+Route::apiResource('companies', CompanyController::class);
+
+Route::apiResource('categories', CategoryController::class);
+
+Route::apiResource('products', ProductController::class);
+
+Route::apiResource('services', ServiceController::class);
+
+Route::apiResource('orders', OrderController::class);
+
+Route::apiResource('vehicles', VehicleController::class);
+
+Route::apiResource('deliveries', DeliveryController::class);
+
+Route::apiResource('carts', CartController::class);
+
